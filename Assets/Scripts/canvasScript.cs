@@ -5,25 +5,23 @@ using UnityEngine.UI;
 
 public class canvasScript : MonoBehaviour
 {
-    public GameObject player;
-    public Text textDisparos;
-    public GameObject disparos;
+    public GameObject player; //Referencia al jugador
+    public Text textDisparos; //Referencia al Text de la UI
+    public GameObject disparos; //Referencia al objeto del contador de disparos
 
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
     void Update()
     {
+        //Revisamos que la referencia al texto de disparos exista primero, antes de asignar el valor de disparos recibidos al player
         if (textDisparos != null)
         {
             textDisparos.text = "Daño: " + disparos.GetComponent<contadorScript>().getDisparosRecibidos();
         }
     }
 
+    /// <summary>
+    /// Se encarga de ejecutar la función disparar del player, al precionar el boton de la UI shoot
+    /// </summary>
     public void shootButton()
     {
         if (player.GetComponent<playerScript>().getEnableshoot() == true)
@@ -32,15 +30,22 @@ public class canvasScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Se encarga de rotar al player a la derecha al precionar el boton de la UI right
+    /// </summary>
     public void right()
     {
         player.GetComponent<Transform>().Rotate(Vector3.up, 90 * Time.deltaTime);
     }
 
+    /// <summary>
+    /// Se encarga de rotar al player a la izquierda al precionar el boton de la UI left
+    /// </summary>
     public void left()
     {
         player.GetComponent<Transform>().Rotate(Vector3.up, -90 * Time.deltaTime);
     }
+
 
     public void startGame()
     {

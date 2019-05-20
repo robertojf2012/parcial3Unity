@@ -4,17 +4,28 @@ using UnityEngine;
 
 public class GENERATOR : MonoBehaviour
 {
+    //Referencia al pool de enemigos
     public SimpleObjectPool enemyPool;
+    
+    //Referencias a las posiciones donde será generado un enemigo
     public Transform generatorPosition;
     public Transform generatorPosition2;
-    public Transform playerPosition;
 
+    //Referencia a la posición del jugador
+    public Transform playerPosition;
+    
     void Start()
     {
+        //Al inicio generamos un enemigo en sus posiciones respectivas
         generateEnemy(generatorPosition);
         generateEnemy(generatorPosition2);
     }
     
+    /// <summary>
+    /// Se encarga de generar un enemigo en la posición indicada
+    /// El enemigo es obtenido del pool de enemigos
+    /// </summary>
+    /// <param name="positionToGenerate">Posición a generar</param>
     public void generateEnemy(Transform positionToGenerate)
     {
         GameObject enemy = enemyPool.GetObject();
@@ -23,6 +34,8 @@ public class GENERATOR : MonoBehaviour
 
     void Update()
     {
+        //Validamos si existen enemigos vivos en las posiciones donde se generaron..
+        //Si no hay.. regeneramos nuevos enemigos
         if (generatorPosition.transform.childCount == 0)
         {
             generateEnemy(generatorPosition);

@@ -19,6 +19,12 @@ public class playerScript : MonoBehaviour
     //Indica si el jugador puede disparar o no
     private bool enableShoot = true;
 
+    void Start()
+    {
+        //Al iniciar, la arma no tiene ninguna colisión
+        arma.GetComponentInChildren<BoxCollider>().isTrigger = true;
+    }
+
     /// <summary>
     /// Verifica si hay colisión con un objeto
     /// </summary>
@@ -37,6 +43,7 @@ public class playerScript : MonoBehaviour
             {
                 gameObject.GetComponentInChildren<Renderer>().material.color = Color.cyan;
                 arma.GetComponentInChildren<Rigidbody>().useGravity = true;
+                arma.GetComponentInChildren<BoxCollider>().isTrigger = false;
                 enableShoot = false;
             }
         }

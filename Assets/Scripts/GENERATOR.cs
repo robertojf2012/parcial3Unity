@@ -28,6 +28,7 @@ public class GENERATOR : MonoBehaviour
     /// <param name="positionToGenerate">Posición a generar</param>
     public void generateEnemy(Transform positionToGenerate)
     {
+        positionToGenerate.position = new Vector3(Random.Range(-0.60f, 0.45f), positionToGenerate.position.y , positionToGenerate.position.z + Random.Range(0,0.10f));
         GameObject enemy = enemyPool.GetObject();
         enemy.GetComponent<enemyScript>().generateMe(positionToGenerate, enemyPool, playerPosition);
     }

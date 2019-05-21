@@ -9,7 +9,6 @@ public class canvasScript : MonoBehaviour
     public Text textDisparos; //Referencia al Text de la UI
     public GameObject disparos; //Referencia al objeto del contador de disparos
 
-
     void Update()
     {
         //Revisamos que la referencia al texto de disparos exista primero, antes de asignar el valor de disparos recibidos al player
@@ -44,12 +43,5 @@ public class canvasScript : MonoBehaviour
     public void left()
     {
         player.GetComponent<Transform>().Rotate(Vector3.up, -90 * Time.deltaTime);
-    }
-
-
-    public void startGame()
-    {
-        //StartCoroutine(enemigo.GetComponent<enemyScript>().waitToShootAgain());
-        //StartCoroutine(enemigo2.GetComponent<enemyScript>().waitToShootAgain());
     }
 }

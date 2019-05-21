@@ -22,6 +22,7 @@ public class enemyScript : MonoBehaviour
     //Indica si el enemigo está vivo o no
     public bool alive = true;
 
+    public bool startShooting = false;
 
     /// <summary>
     /// Se encarga de generar al enemigo mismo en la posición definida.
@@ -60,14 +61,15 @@ public class enemyScript : MonoBehaviour
     /// <param name="collision">Objeto con el que se hizo colisión</param>
     private void OnCollisionEnter(Collision collision)
     {
-        //if(collision.gameObject.tag == "bullet")
-        //{
+        if (collision.gameObject.tag == "bullet" || collision.gameObject.tag == "bulletEnemy")
+        {
+            startShooting = true;
             gameObject.GetComponentInChildren<Renderer>().material.color = Color.grey;
             gameObject.GetComponent<Rigidbody>().useGravity = true;
             gameObject.GetComponent<Rigidbody>().freezeRotation = false;
             StartCoroutine(waitToReturn());
             alive = false;
-        //}
+        }
     }
 
     /// <summary>
@@ -79,7 +81,7 @@ public class enemyScript : MonoBehaviour
     {
         int seconds = Random.Range(2, 5);
         yield return new WaitForSeconds(seconds);
-        if (alive)
+        if (alive && startShooting)
         {
             shoot(playerPosition);
             StartCoroutine(waitToShootAgain(playerPosition));
